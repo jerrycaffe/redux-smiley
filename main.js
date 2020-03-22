@@ -4,47 +4,52 @@ const initialState = {
   mood: "NORMAL",
   payload: "I am Normal"
 }
-function setMood(mood, payload){
+
+function setMood(mood, payload) {
   return {
     type: mood,
     payload: payload
   }
 }
 
-function reducer(state=initialState, action) {
-  
-    if(action.type === 'HAPPY') {
-   let mood = action.payload;
-    return mood;
-            }else if(action.type === 'SAD'){
-              let mood = action.payload;
-              return mood;
-            }else if(action.type === 'ANGRY'){
-              let mood = action.payload;
-              return mood;
-            }else if(action.type === 'CONFUSED'){
-              let mood = action.payload;
-              return mood;
-            }
-        return state;
+function reducer(state = initialState, action) {
+  let states = {
+    ...state
+  }
+  newMod = states.mood
+  let newMood = action.payload;
+  switch (action.type) {
+    case 'HAPPY':
+      return newMood;
+    case 'SAD':
+      return newMood;
+    case 'ANGRY':
+      return newMood;
+    case 'CONFUSED':
+      return newMood
+
+    default:
+      return state;
+  }
+
 }
 const store = Redux.createStore(reducer)
 document.getElementById('happy')
-.addEventListener('click', ()=>{
-  return store.dispatch(setMood("HAPPY", '&#128512'))
-})
+  .addEventListener('click', () => {
+    return store.dispatch(setMood("HAPPY", '&#128512'))
+  })
 document.getElementById('sad')
-.addEventListener('click', ()=>{
-  return store.dispatch(setMood("SAD", '&#128547'))
-})
+  .addEventListener('click', () => {
+    return store.dispatch(setMood("SAD", '&#128547'))
+  })
 document.getElementById('angry')
-.addEventListener('click', ()=>{
-  return store.dispatch(setMood("ANGRY", '&#128544'))
-})
+  .addEventListener('click', () => {
+    return store.dispatch(setMood("ANGRY", '&#128544'))
+  })
 document.getElementById('confused')
-.addEventListener('click', ()=>{
-  return store.dispatch(setMood("CONFUSED", '&#128533'))
-})
+  .addEventListener('click', () => {
+    return store.dispatch(setMood("CONFUSED", '&#128533'))
+  })
 store.subscribe(() => {
   result.innerHTML = (store.getState());
 })
