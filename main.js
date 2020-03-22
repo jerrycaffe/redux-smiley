@@ -2,7 +2,7 @@ let result = document.getElementById('face')
 // get all the values to be updated from the html page
 const initialState = {
   mood: "NORMAL",
-  payload: "I am Normal"
+  payload: "&#128528;"
 }
 
 function setMood(mood, payload) {
