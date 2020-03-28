@@ -1,32 +1,31 @@
 let result = document.getElementById('face')
 // get all the values to be updated from the html page
 const initialState = {
-  mood: "NORMAL",
-  payload: "&#128528;"
+  mood: ""
 }
 
-function setMood(mood, payload) {
+function setHappy(payload){
   return {
-    type: mood,
-    payload: payload
+    type: "HAPPY",
+    payload
   }
 }
 
 function reducer(state = initialState, action) {
-  let states = {
-    ...state
-  }
-  newMod = states.mood
-  let newMood = action.payload;
+  
   switch (action.type) {
     case 'HAPPY':
-      return newMood;
+      return {
+        ...state,
+        mood: action.payload}
+    
     case 'SAD':
-      return newMood;
+      return {mood: "&#128547"}
+
     case 'ANGRY':
-      return newMood;
+      return {mood: "&#128544"}
     case 'CONFUSED':
-      return newMood
+      return {mood: "&#128533"}
 
     default:
       return state;
@@ -36,22 +35,23 @@ function reducer(state = initialState, action) {
 const store = Redux.createStore(reducer)
 document.getElementById('happy')
   .addEventListener('click', () => {
-    return store.dispatch(setMood("HAPPY", '&#128512'))
+   return store.dispatch(setHappy("&#128512"))
   })
 document.getElementById('sad')
   .addEventListener('click', () => {
-    return store.dispatch(setMood("SAD", '&#128547'))
+    return store.dispatch({type: 'SAD'})
   })
 document.getElementById('angry')
   .addEventListener('click', () => {
-    return store.dispatch(setMood("ANGRY", '&#128544'))
+    return store.dispatch({type: 'ANGRY'})
   })
 document.getElementById('confused')
   .addEventListener('click', () => {
-    return store.dispatch(setMood("CONFUSED", '&#128533'))
+    return store.dispatch({type: 'CONFUSED'})
   })
 store.subscribe(() => {
-  result.innerHTML = (store.getState());
+
+  result.innerHTML = (store.getState().mood);
 })
 
 // add event listeners to all the buttons on the UI
